@@ -73,11 +73,15 @@ export default {
           console.log(error);
         });
     },
+    open(e) {
+      fancyBox(e.target, this.books);
+    },
     searchBooks: function() {
       console.log("here");
       let input = document.getElementById("searchbar").value;
       input = input.toLowerCase();
-      let searchTitles = document.getElementsByTagName("h2");
+      let searchTitles = document.getElementsByClassName("container");
+      console.log(searchTitles);
 
       for (let i = 0; i < searchTitles.length; i++) {
         if (!searchTitles[i].innerHTML.toLowerCase().includes(input)) {
