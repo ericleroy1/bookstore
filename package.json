@@ -8,11 +8,15 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vue-fancybox": "^1.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
+    "bootstrap": "^4.0.0-beta",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1",
     "vue-template-compiler": "^2.6.10"
   }
 }
