@@ -15,7 +15,7 @@
     </div>
 
     <div id="mainDiv" class="mainDiv">
-      <div v-for="book in books" :key="book.index">
+      <div class="subDiv" v-for="(book, index) in books" :key="index">
         <div class="container">
           <div class="wholeCard">
             <div class="frontCard">
@@ -25,14 +25,15 @@
               <h2>{{book.title}}</h2>
               <p>{{book.description}}</p>
 
-              <button>
-                More Info
-                <a
-                  :href="book.detail"
-                  data-fancybox
-                  data-caption="&lt;b&gt;Single photo&lt;/b&gt;&lt;br /&gt;Caption can contain &lt;em&gt;any&lt;/em&gt; HTML elements"
-                ></a>
-              </button>
+              <!-- Modal -->
+
+              <div>
+                <b-button @click="modalShow = !modalShow">More Info</b-button>
+
+                <b-modal v-model="modalShow">
+                  <img :src="book.detail" alt />
+                </b-modal>
+              </div>
             </div>
           </div>
         </div>
@@ -55,7 +56,8 @@ export default {
   },
   data() {
     return {
-      books: []
+      books: [],
+      modalShow: false
     };
   },
   methods: {
@@ -73,14 +75,11 @@ export default {
           console.log(error);
         });
     },
-    open(e) {
-      fancyBox(e.target, this.books);
-    },
     searchBooks: function() {
       console.log("here");
       let input = document.getElementById("searchbar").value;
       input = input.toLowerCase();
-      let searchTitles = document.getElementsByClassName("container");
+      let searchTitles = document.getElementsByClassName("subDiv");
       console.log(searchTitles);
 
       for (let i = 0; i < searchTitles.length; i++) {
@@ -92,7 +91,6 @@ export default {
       }
     }
   },
-
   created: function() {
     this.fetchData();
   }
@@ -136,12 +134,15 @@ input {
   flex-wrap: wrap;
   justify-content: space-between;
   padding-bottom: 50px;
+  width: 100vw;
 }
-
+.subDiv {
+  width: 400px;
+}
 .container {
   margin-top: 20px;
   background-color: transparent;
-  width: 300px;
+  width: 82%;
   height: 480px;
   perspective: 1000px;
 }
@@ -153,7 +154,7 @@ img {
 }
 
 .wholeCard {
-  width: 100%;
+  width: 81%;
   height: 100%;
   text-align: center;
   transition: transform 0.5s;
